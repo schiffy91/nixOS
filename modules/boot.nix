@@ -5,7 +5,6 @@ let
     lanzaboote = import sources.lanzaboote;
 in
 {
-  # Lanzaboote for Secure Boot
   imports = [ lanzaboote.nixosModules.lanzaboote ];
   environment.systemPackages = [ pkgs.sbctl ];
   boot = {
@@ -19,7 +18,6 @@ in
     };
   };
 
-  # Setup keyfile for Secure Boot
   system.activationScripts.postActivation.text = ''
     if ! ${pkgs.sbctl}/bin/sbctl status | grep "Setup Mode: false"; then
       if ! ${pkgs.sbctl}/bin/sbctl verify; then
