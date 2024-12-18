@@ -1,5 +1,4 @@
-# ./hosts/FRACTAL-NORTH/default.nix
-{ ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ../../modules/partitioning
   ];
@@ -29,9 +28,9 @@
     })
   ];
 
-  # Partitioning
-  partitioning = {
-    enable = false;
+  # Partitioning (Enable only for the -PARTITIONED configuration)
+  partitioning = lib.mkIf (lib.hasSuffix "-PARTITIONED" config.networking.hostName) {
+    enable = true;
     swapSize = "65G";
     defaultHardDrive = "/dev/nvme0n1";
   };

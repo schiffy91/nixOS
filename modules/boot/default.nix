@@ -17,7 +17,7 @@
     loader = {
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    # Moved kernelPackages to host specific files
     supportedFilesystems = [ "btrfs" ];
   };
 

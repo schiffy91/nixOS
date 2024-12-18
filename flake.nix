@@ -8,32 +8,24 @@
 
   outputs = { self, nixpkgs, disko }@inputs:
     let
-      mkSystem = hostname: overlay:
-        let
-          hostModule = import ./hosts/${hostname};
-          system = hostModule.system;
-          pkgs = import nixpkgs {
-            inherit system;
-          };
-        in
+      mkSystem = hostname: {
         nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = (import ./hosts/${hostname}).system;
           modules = [
             ./configuration.nix
-            hostModule
+            ./hosts/${hostname}
             disko.nixosModules.default
-            {
-              nixpkgs.overlays = [ overlay ];
-            }
           ];
         };
+      };
     in
     {
       nixosConfigurations = {
-        FRACTAL-NORTH = mkSystem "FRACTAL-NORTH" (self: super: {});
-        FRACTAL-NORTH-PARTITIONED = mkSystem "FRACTAL-NORTH" (import ./overlays/partitioning-overlay.nix);
-        MBP-M1-VM = mkSystem "MBP-M1-VM" (self: super: {});
-        MBP-M1-VM-PARTITIONED = mkSystem "MBP-M1-VM" (import ./overlays/partitioning-overlay.nix);
+        # Define your NixOS configurations here
+        FRACTAL-NORTH = mkSystem "FRACTAL-NORTH";
+        FRACTAL-NORTH-PARTITIONED = mkSystem "FRACTAL-NORTH";
+        MBP-M1-VM = mkSystem "MBP-M1-VM";
+        MBP-M1-VM-PARTITIONED = mkSystem "MBP-M1-VM";
       };
     };
 }
