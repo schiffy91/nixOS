@@ -1,11 +1,10 @@
-{ config, pkgs, lib, ... }:
 {
   imports = [
     ../../modules/partitioning
   ];
 
   # System information
-  system.system = "aarch64-linux";
+  system = "aarch64-linux";
   networking.hostName = "MBP-M1-VM";
 
   # Asahi drivers
@@ -19,9 +18,9 @@
   boot.kernelPackages = pkgs.linuxPackages_asahi;
 
   # Partitioning
-  partitioning = config.partitioning // {
+  partitioning = {
     enable = true;
     swapSize = "17G";
-    defaultHardDrive = "/dev/vda";
+    defaultHardDrive = "/dev/nvme0n1";
   };
 }

@@ -12,12 +12,12 @@ in
       };
       defaultHardDrive = mkOption {
         type = types.str;
-        default = "";
+        default = "/dev/sda"; # Default value
         description = "Default hard drive to use for partitioning";
       };
       swapSize = mkOption {
         type = types.str;
-        default = "16G";
+        default = "16G"; # Default value
         description = "Size of the swap file";
       };
     };

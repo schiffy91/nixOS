@@ -1,11 +1,10 @@
-{ config, pkgs, lib, ... }:
 {
   imports = [
     ../../modules/partitioning
   ];
 
   # System information
-  system.system = "x86_64-linux";
+  system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
 
   # Nvidia drivers
@@ -25,7 +24,7 @@
   };
 
   # Partitioning
-  partitioning = config.partitioning // {
+  partitioning = {
     enable = false;
     swapSize = "65G";
     defaultHardDrive = "/dev/nvme0n1";
