@@ -26,7 +26,6 @@ in
   config = mkIf config.partitioning.enable {
     disko.devices = {
       disk = {
-        # Use the defaultHardDrive variable passed from hosts/FRACTAL-NORTH/default.nix
         "${config.partitioning.defaultHardDrive}" = {
           type = "disk";
           content = {
@@ -68,7 +67,6 @@ in
                       mountOptions = [ "subvol=swap" "noatime" ];
                       swap = {
                         swapfile = {
-                          # Use swapSize variable from FRACTAL-NORTH
                           size = config.partitioning.swapSize;
                         };
                       };
