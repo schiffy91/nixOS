@@ -22,37 +22,47 @@
                   ];
                 };
               };
-              root = {
+              cryptroot = {
                 size = "100%";
                 content = {
-                  format = "btrfs";
-                  type = "btrfs";
-                  extraArgs = [ "-f" ];
-                  subvolumes = {
-                    "/" = {
-                      mountpoint = "/";
-                      mountOptions = [ "compress=zstd" "subvol=root" "noatime" ];
-                    };
-                    "/home" = {
-                      mountpoint = "/home";
-                      mountOptions = [ "compress=zstd" "subvol=home" "noatime" ];
-                    };
-                    "/nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [ "compress=zstd" "noatime" "subvol=nix" "nodatacow" ];
-                    };
-                    "/.swapvol" = {
-                      mountpoint = "/.swapvol";
-                      mountOptions = [ "subvol=swap" "noatime" ];
-                      swap = {
-                        swapfile = {
-                          size = config.partitioning.swapSize;
+                  type = "luks";
+                  name = "cryptroot";
+                  settings = {
+                    allowDiscards = true;
+                  };
+                  content = {
+                    type = "btrfs";
+                    extraArgs = [ "-f" ];
+                    subvolumes = {
+                      "/" = {
+                        mountpoint = "/";
+                        mountOptions = [ "compress=zstd" "subvol=root" "noatime" ];
+                      };
+                      "/home" = {
+                        mountpoint = "/home";
+                        mountOptions = [ "compress=zstd" "subvol=home" "noatime" ];
+                      };
+                      "/nix" = {
+                        mountpoint = "/nix";
+                        mountOptions = [ "compress=zstd" "noatime" "subvol=nix" "nodatacow" ];
+                      };
+                      "/.swapvol" = {
+                        mountpoint = "/.swapvol";
+                        mountOptions = [ "subvol=swap" "noatime" ];
+                        swap = {
+                          encrypted = {
+                            enable = true;
+                            device = "/.swapvol/swapfile";
+                          };
+                          swapfile = {
+                            size = config.partitioning.swapSize;
+                          };
                         };
                       };
-                    };
-                    "/var" = {
-                      mountpoint = "/var";
-                      mountOptions = [ "compress=zstd" "subvol=var" "noatime" ];
+                      "/var" = {
+                        mountpoint = "/var";
+                        mountOptions = [ "compress=zstd" "subvol=var" "noatime" ];
+                      };
                     };
                   };
                 };

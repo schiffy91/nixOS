@@ -13,7 +13,6 @@ in
     ./modules/networking.nix
     ./modules/sound.nix
     ./modules/users.nix
-    ./lanzaboote.nix
     hostConfig
   ] ++ (lib.optionals partition [ ./modules/partitioning ]);
   system.stateVersion = "24.11";
