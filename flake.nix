@@ -1,4 +1,5 @@
-# sudo nixos-rebuild switch --flake .#[FRACTAL-NORTH | MBP-M1-VM] [config partitioning enable true]
+# sudo nixos-rebuild switch --flake .#FRACTAL-NORTH --option config.partitioning.enable true 
+# sudo nixos-rebuild switch --flake .#MBP-M1-VM --option config.partitioning.enable true
 {
   description = "NixOS configuration";
 
