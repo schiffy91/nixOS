@@ -1,26 +1,21 @@
 { config, pkgs, lib, ... }:
 
+let
+    sources = import ./nix/sources.nix;
+    lanzaboote = import sources.lanzaboote;
+in
 {
   # Lanzaboote for Secure Boot
-  system.activationScripts.preActivation.text = ''
-    if [ ! -d /etc/secureboot ]; then
-      mkdir -p /etc/secureboot
-      chmod 700 /etc/secureboot
-    fi
-  '';
+  imports = [ lanzaboote.nixosModules.lanzaboote ];
+  environment.systemPackages = [ pkgs.sbctl ];
   boot = {
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";
     };
     loader = {
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 2;
-        consoleMode = "max";
-        efiSysMountPoint = "/efi"; 
-      };
     };
   };
 
