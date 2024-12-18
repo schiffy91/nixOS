@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration";
+  description = "NixOS configuration"; # nixos-rebuild switch --flake .#MBP-M1-VM --arg config '{ partitioning = { enable = true; }; }'
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
