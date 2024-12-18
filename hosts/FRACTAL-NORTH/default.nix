@@ -1,20 +1,15 @@
-{ config, pkgs, lib, ... }:
-let
-  defaultHardDrive = "/dev/nvme0n1";
-  nvidiaBusID = "PCI:1:0:0";
-  amdgpuBusID = "PCI:69:0:0";
-  ramSize = "64G";
-  system = "x86_64-linux";
-in
+{ config, pkgs, lib, config ? {}, ... }:
 {
   imports = [
     ../../modules/partitioning
   ];
+  
+  system.system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
 
   hardware.nvidia = {
     amdgpuBusId = amdgpuBusID;
-    nvidiaBusId = nvidiaBusID;
+    nvidiaBusId = "PCI:69:0:0";
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;
     open = false;
@@ -25,6 +20,9 @@ in
     nvidiaSettings = true;
   };
 
-  partitioning.swapSize = ramSize;
-  partitioning.defaultHardDrive = defaultHardDrive;
+  partitioning = {
+    enable = config.partitioning.enable or false;
+    swapSize = "65G";
+    defaultHardDrive = "/dev/nvme0n1";
+  };
 }

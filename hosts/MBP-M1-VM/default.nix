@@ -1,23 +1,21 @@
-{ config, pkgs, lib, ... }:
-let
-  defaultHardDrive = "/dev/nvme0n1";
-  ramSize = "16G";
-  system = "aarch64-linux";
-in
+{ config, pkgs, lib, config ? {}, ... }:
 {
   imports = [
     ../../modules/partitioning
   ];
   
-  networking.hostName = "MBP-M1-NIXOS-VM";
-
-  services.xserver.videoDrivers = [ "fbdev" ];  # Basic framebuffer driver
-
+  system.system = "aarch64-linux";
+  networking.hostName = "MBP-M1-VM";
+  
+  services.xserver.videoDrivers = [ "fbdev" ];
   hardware.opengl = {
     enable = true;
     driSupport = true;
   };
 
-  partitioning.swapSize = ramSize;
-  partitioning.defaultHardDrive = defaultHardDrive;
+  partitioning = {
+    enable = config.partitioning.enable or false;
+    swapSize = "16G";
+    defaultHardDrive = "/dev/nvme0n1";
+  };
 }
