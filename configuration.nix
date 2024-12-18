@@ -6,7 +6,6 @@
     ./modules/networking
     ./modules/desktop
     ./modules/sound
-    ./modules/virtualization
     ./modules/packages
     ./modules/users
     ./modules/locale

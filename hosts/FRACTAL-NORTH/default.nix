@@ -4,9 +4,11 @@
     ../../modules/partitioning
   ];
   
+  # System information
   system.system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
 
+  # Nvidia drivers
   hardware.nvidia = {
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -20,9 +22,30 @@
     };
   };
 
+  # Partitioning
   partitioning = config.partitioning // {
     enable = false;
     swapSize = "65G";
     defaultHardDrive = "/dev/nvme0n1";
+  };
+
+  # Virtualization (libvirt, podman)
+  programs.virt-manager.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        swtpm.enable = true;
+        runAsRoot = false;
+      };
+    };
+    spiceUSBRedirection.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
   };
 }
