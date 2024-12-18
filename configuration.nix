@@ -1,4 +1,3 @@
-./configuration.nix
 { config, pkgs, lib, ... }:
 
 let
