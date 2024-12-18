@@ -30,7 +30,7 @@
     {
       nixosConfigurations = {
         FRACTAL-NORTH = mkSystem "FRACTAL-NORTH" (self: super: {});
-        FRACTAL-NORTH-PARTITIONED = mkSystem "MBP-M1-VM" (import ./overlays/partitioning-overlay.nix);
+        FRACTAL-NORTH-PARTITIONED = mkSystem "FRACTAL-NORTH" (import ./overlays/partitioning-overlay.nix);
         MBP-M1-VM = mkSystem "MBP-M1-VM" (self: super: {});
         MBP-M1-VM-PARTITIONED = mkSystem "MBP-M1-VM" (import ./overlays/partitioning-overlay.nix);
       };
