@@ -8,7 +8,6 @@
       chmod 700 /etc/secureboot
     fi
   '';
-
   boot = {
     lanzaboote = {
       enable = true;
@@ -17,8 +16,6 @@
     loader = {
       efi.canTouchEfiVariables = true;
     };
-    # Moved kernelPackages to host specific files
-    supportedFilesystems = [ "btrfs" ];
   };
 
   # Setup keyfile for Secure Boot
