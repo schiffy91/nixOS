@@ -8,16 +8,16 @@
   networking.hostName = "FRACTAL-NORTH";
 
   hardware.nvidia = {
-    amdgpuBusId = amdgpuBusID;
-    nvidiaBusId = "PCI:69:0:0";
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    powerManagement.enable = true;
     open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    nvidiaSettings = true;
+    powerManagement.enable = true;
     prime = {
       enable = true;
       enableOffloadCmd = true;
+      amdgpuBusId = "PCI:1:0:0";
+      nvidiaBusId = "PCI:69:0:0";
     };
-    nvidiaSettings = true;
   };
 
   partitioning = config.partitioning // {

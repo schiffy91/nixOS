@@ -3,7 +3,6 @@
 {
   imports = [
     ./modules/boot
-    ./modules/hardware
     ./modules/networking
     ./modules/desktop
     ./modules/sound

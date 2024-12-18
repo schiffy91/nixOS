@@ -24,8 +24,10 @@
 
   # Setup keyfile for Secure Boot
   system.activationScripts.postActivation.text = ''
-    if ! ${pkgs.sbctl}/bin/sbctl verify; then
-      ${pkgs.sbctl}/bin/sbctl enroll-keys --microsoft
+    if ! ${pkgs.sbctl}/bin/sbctl status | grep "Setup Mode: false"; then
+      if ! ${pkgs.sbctl}/bin/sbctl verify; then
+        ${pkgs.sbctl}/bin/sbctl enroll-keys --microsoft
+      fi
     fi
   '';
 }
