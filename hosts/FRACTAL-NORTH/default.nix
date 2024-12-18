@@ -1,5 +1,5 @@
+# ./hosts/FRACTAL-NORTH/default.nix
 { ... }: {
-
   imports = [
     ../../modules/partitioning
   ];
@@ -9,20 +9,25 @@
   networking.hostName = "FRACTAL-NORTH";
 
   # Nvidia drivers
-  nixpkgs.config.allowUnfree = true;
-
-  hardware.nvidia = {
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    nvidiaSettings = true;
-    powerManagement.enable = true;
-    prime = {
-      enable = true;
-      enableOffloadCmd = true;
-      amdgpuBusId = "PCI:1:0:0";
-      nvidiaBusId = "PCI:69:0:0";
-    };
-  };
+  nixpkgs.overlays = [
+    (self: super: {
+      nvidiaPackages = super.nvidiaPackages.override {
+        config = { allowUnfree = true; };
+      };
+      hardware.nvidia = {
+        open = false;
+        package = self.nvidiaPackages.stable;
+        nvidiaSettings = true;
+        powerManagement.enable = true;
+        prime = {
+          enable = true;
+          enableOffloadCmd = true;
+          amdgpuBusId = "PCI:1:0:0";
+          nvidiaBusId = "PCI:69:0:0";
+        };
+      };
+    })
+  ];
 
   # Partitioning
   partitioning = {
@@ -37,7 +42,7 @@
     libvirtd = {
       enable = true;
       qemu = {
-        package = pkgs.qemu_kvm;
+        package = pkgs.qemu;
         ovmf.enable = true;
         ovmf.packages = [ pkgs.OVMFFull.fd ];
         swtpm.enable = true;

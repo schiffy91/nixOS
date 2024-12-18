@@ -18,7 +18,6 @@
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit pkgs; };
           modules = [
             ./configuration.nix
             hostModule

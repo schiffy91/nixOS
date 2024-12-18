@@ -12,7 +12,8 @@ in
       };
       defaultHardDrive = mkOption {
         type = types.str;
-        default = "/dev/nvme0n1"; # Default value
+        default = lib.mkOverride 0 "";
+        example = "/dev/nvme0n1";
         description = "Default hard drive to use for partitioning";
       };
       swapSize = mkOption {
@@ -47,6 +48,7 @@ in
               root = {
                 size = "100%";
                 content = {
+                  format = "btrfs";
                   type = "btrfs";
                   extraArgs = [ "-f" ];
                   subvolumes = {

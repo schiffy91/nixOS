@@ -15,7 +15,6 @@
       pkiBundle = "/etc/secureboot";
     };
     loader = {
-      systemd-boot.enable = lib.mkForce false; # let disko handle this
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;
