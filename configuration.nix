@@ -14,6 +14,6 @@ in
     ./modules/sound.nix
     ./modules/users.nix
     hostConfig
-  ] ++ (lib.optionals partition [ ./modules/partitioning ]);
+  ] ++ (lib.optionals partition [ ./modules/partitioning.nix ]);
   system.stateVersion = "24.11";
 }
