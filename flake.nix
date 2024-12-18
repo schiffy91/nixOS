@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration"; # nixos-rebuild switch --flake .#MBP-M1-VM --arg config '{ partitioning = { enable = true; }; }'
+  description = "NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -8,22 +8,31 @@
 
   outputs = { self, nixpkgs, disko }@inputs:
     let
-      mkSystem = hostname: system: config: nixpkgs.lib.nixosSystem {
-        system = system;
-        specialArgs = {
-          inherit config;
+      mkSystem = hostname: overlay:
+        let
+          hostModule = import ./hosts/${hostname};
+          system = hostModule.config.system.system;
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ overlay ];
+          };
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit pkgs; };
+          modules = [
+            ./configuration.nix
+            hostModule
+            disko.nixosModules.default
+          ];
         };
-        modules = [
-          ./configuration.nix
-          ./hosts/${hostname}
-          disko.nixosModules.default
-        ];
-      };
     in
     {
       nixosConfigurations = {
-        FRACTAL-NORTH = mkSystem "FRACTAL-NORTH" "x86_64-linux" {};
-        MBP-M1-VM = mkSystem "MBP-M1-VM" "aarch64-linux" {};
+        FRACTAL-NORTH = mkSystem "FRACTAL-NORTH" (self: super: {});
+        FRACTAL-NORTH-PARTITIONED = mkSystem "MBP-M1-VM" (import ./overlays/partitioning-overlay.nix);
+        MBP-M1-VM = mkSystem "MBP-M1-VM" (self: super: {});
+        MBP-M1-VM-PARTITIONED = mkSystem "MBP-M1-VM" (import ./overlays/partitioning-overlay.nix);
       };
     };
 }

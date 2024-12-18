@@ -1,4 +1,4 @@
-{ config, pkgs, lib, config ? {}, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     ../../modules/partitioning
@@ -20,8 +20,8 @@
     nvidiaSettings = true;
   };
 
-  partitioning = {
-    enable = config.partitioning.enable or false;
+  partitioning = config.partitioning // {
+    enable = false;
     swapSize = "65G";
     defaultHardDrive = "/dev/nvme0n1";
   };
