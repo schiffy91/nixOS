@@ -11,7 +11,7 @@
       mkSystem = hostname: overlay:
         let
           hostModule = import ./hosts/${hostname};
-          system = hostModule.config.system.system;
+          system = hostModule.system;
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ overlay ];
@@ -24,6 +24,10 @@
             ./configuration.nix
             hostModule
             disko.nixosModules.default
+            # Apply the overlay to the configuration as a module
+            {
+              nixpkgs.overlays = [ overlay ];
+            }
           ];
         };
     in
