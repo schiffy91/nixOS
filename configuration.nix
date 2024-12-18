@@ -6,13 +6,13 @@ let
 in
 {
   imports = [
-    ./modules/boot
-    ./modules/desktop
-    ./modules/locale
-    ./modules/packages
-    ./modules/networking
-    ./modules/sound
-    ./modules/users
+    ./modules/boot.nix
+    ./modules/desktop.nix
+    ./modules/locale.nix
+    ./modules/packages.nix
+    ./modules/networking.nix
+    ./modules/sound.nix
+    ./modules/users.nix
     ./lanzaboote.nix
     hostConfig
   ] ++ (lib.optionals partition [ ./modules/partitioning ]);

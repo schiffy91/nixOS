@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Desktop Environment (Plasma 6)
   services.xserver.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.displayManager = {

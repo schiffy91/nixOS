@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Sound (PipeWire)
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {

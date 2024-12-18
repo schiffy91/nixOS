@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  # System Packages
   environment.systemPackages = with pkgs; [
     micro
     wget
