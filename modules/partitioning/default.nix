@@ -1,33 +1,10 @@
 { config, pkgs, lib, ... }:
-let
-  inherit (lib) mkOption mkIf types;
-in
-{
-  options = {
-    partitioning = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Enable automatic partitioning";
-      };
-      defaultHardDrive = mkOption {
-        type = types.str;
-        default = lib.mkOverride 0 "";
-        example = "/dev/nvme0n1";
-        description = "Default hard drive to use for partitioning";
-      };
-      swapSize = mkOption {
-        type = types.str;
-        default = "17G"; # Default value
-        description = "Size of the swap file";
-      };
-    };
-  };
 
-  config = mkIf config.partitioning.enable {
+{
+  config = lib.mkIf (config.partitioning.target != null && config.partitioning.swapSize != null) {
     disko.devices = {
       disk = {
-        "${config.partitioning.defaultHardDrive}" = {
+        "${config.partitioning.target}" = {
           type = "disk";
           content = {
             type = "gpt";

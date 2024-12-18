@@ -1,8 +1,6 @@
-{ config, pkgs, lib, ... }: {
-  imports = [
-    ../../modules/partitioning
-  ];
+{ config, pkgs, lib, ... }: 
 
+{
   # System information
   system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
@@ -28,11 +26,10 @@
     })
   ];
 
-  # Partitioning (Enable only for the -PARTITIONED configuration)
-  partitioning = lib.mkIf (lib.hasSuffix "-PARTITIONED" config.networking.hostName) {
-    enable = true;
+  # Partitioning
+  partitioning = {
     swapSize = "65G";
-    defaultHardDrive = "/dev/nvme0n1";
+    target = "/dev/nvme0n1";
   };
 
   # Virtualization (libvirt, podman)
