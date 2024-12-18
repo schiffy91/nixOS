@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  hostConfig = import ./hosts/${"FRACTAL-NORTH"}.nix { inherit config pkgs lib; };
+  hostConfig = import ./hosts/${"MBP-M1-VM"}.nix { inherit config pkgs lib; };
   partition = true;
   lanzaboote = import (builtins.fetchTarball { url = "https://github.com/nix-community/lanzaboote/archive/refs/tags/v0.4.1.tar.gz"; }) + "/nixosModules" { inherit pkgs lib; };
 in
