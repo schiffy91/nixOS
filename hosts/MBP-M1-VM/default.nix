@@ -1,4 +1,5 @@
-{
+{ ... }: {
+
   imports = [
     ../../modules/partitioning
   ];
@@ -21,6 +22,6 @@
   partitioning = {
     enable = true;
     swapSize = "17G";
-    defaultHardDrive = "/dev/nvme0n1";
+    defaultHardDrive = "/dev/vda";
   };
 }

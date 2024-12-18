@@ -14,7 +14,6 @@
           system = hostModule.system;
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ overlay ];
           };
         in
         nixpkgs.lib.nixosSystem {
@@ -24,7 +23,6 @@
             ./configuration.nix
             hostModule
             disko.nixosModules.default
-            # Apply the overlay to the configuration as a module
             {
               nixpkgs.overlays = [ overlay ];
             }
