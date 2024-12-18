@@ -5,6 +5,12 @@
   system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
 
+  # Partitioning
+  partitioning = {
+    swapSize = "65G";
+    target = "/dev/nvme0n1";
+  };
+
   # Nvidia drivers
   nixpkgs.overlays = [
     (self: super: {
@@ -25,12 +31,6 @@
       };
     })
   ];
-
-  # Partitioning
-  partitioning = {
-    swapSize = "65G";
-    target = "/dev/nvme0n1";
-  };
 
   # Virtualization (libvirt, podman)
   programs.virt-manager.enable = true;
