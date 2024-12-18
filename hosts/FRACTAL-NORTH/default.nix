@@ -3,15 +3,22 @@
   imports = [
     ../../modules/partitioning
   ];
-  
+
   # System information
   system.system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
 
   # Nvidia drivers
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: {
+      nvidiaPackages = config.boot.kernelPackages.nvidiaPackages // {
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
+      };
+    };
+  };
   hardware.nvidia = {
     open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
     nvidiaSettings = true;
     powerManagement.enable = true;
     prime = {
