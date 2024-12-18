@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # secure boot
 if [ ! -d /etc/secureboot ]; then
