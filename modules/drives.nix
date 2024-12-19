@@ -4,8 +4,8 @@ let
   cfg = config.custom.driveConfiguration;
 in {
   options.custom.driveConfiguration = {
-    target = mkOption { type = types.str; default = null; };
-    swapSize = mkOption { type = types.str; default = null; };
+    target = mkOption { type = types.nullOr types.str; default = null; };
+    swapSize = mkOption { type = types.nullOr types.str; default = null; };
   };
   config = mkIf (cfg.target != null && cfg.swapSize != null) {
     disko.devices = {
