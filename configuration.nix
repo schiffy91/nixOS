@@ -2,7 +2,7 @@
 
 {
   imports = [
-    lanzaboote.nixosModules.default
+    lanzaboote.nixosModules.lanzaboote
     disko.nixosModules.default
     ./modules/drives.nix
     ./modules/boot.nix
