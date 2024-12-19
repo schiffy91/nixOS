@@ -4,7 +4,7 @@ let
   # Fetch disko v1.10.0 from GitHub
   disko = import (builtins.fetchTarball {
     url = "https://github.com/nix-community/disko/archive/refs/tags/v1.10.0.tar.gz";
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Replace with the correct hash
+    sha256 = "0jfasvk0hz76cipnv2mfrbgf86gcmnf0niapcm7p37xh7a0w2wxj"; # Replace with the correct hash
   }) { inherit lib pkgs; };
 
   # Fetch lanzaboote v0.4.1 from GitHub
