@@ -1,6 +1,8 @@
-{ config, pkgs, lib, ... }: 
+{ config, pkgs, lib, disko, lanzaboote, ... }:
 
 {
+  imports = [ ../modules/partitioning.nix ]; # Import partitioning.nix
+
   # System information
   system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";

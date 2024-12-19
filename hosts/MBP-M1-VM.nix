@@ -1,6 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, disko, lanzaboote, ... }:
 
 {
+  imports = [ ../modules/partitioning.nix ]; # Import partitioning.nix
+  
   # System information
   system.system = "aarch64-linux";
   networking.hostName = "MBP-M1-VM";
