@@ -1,4 +1,5 @@
 #!/bin/sh
+sudo nixos-generate-config
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 PS3="Select host: "
 select host in MBP-M1-VM FRACTAL-NORTH; do
