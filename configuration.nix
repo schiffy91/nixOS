@@ -1,8 +1,18 @@
 { config, pkgs, lib, ... }:
 
 let
-  disko = import ./dependencies/disko { inherit lib pkgs; };
-  lanzaboote = import ./dependencies/lanzaboote { inherit lib pkgs; };
+  # Fetch disko v1.10.0 from GitHub
+  disko = import (builtins.fetchTarball {
+    url = "https://github.com/nix-community/disko/archive/refs/tags/v1.10.0.tar.gz";
+    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Replace with the correct hash
+  }) { inherit lib pkgs; };
+
+  # Fetch lanzaboote v0.4.1 from GitHub
+  lanzaboote = import (builtins.fetchTarball {
+    url = "https://github.com/nix-community/lanzaboote/archive/refs/tags/v0.4.1.tar.gz";
+    sha256 = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="; # Replace with the correct hash
+  }) { inherit lib pkgs; };
+
   hostConfig = import ./hosts/${builtins.baseNameOf ./host} { inherit config pkgs lib; };
 in
 {
