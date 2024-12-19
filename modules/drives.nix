@@ -7,7 +7,7 @@ in {
     target = mkOption { type = types.str; default = null; };
     swapSize = mkOption { type = types.str; default = null; };
   };
-  config = mkIf !isNull cfg.target && !isNull cfg.swapSize {
+  config = mkIf (cfg.target != null && cfg.swapSize != null) {
     disko.devices = {
       disk = {
         main = {
