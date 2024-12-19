@@ -1,6 +1,6 @@
-[submodule "dependencies/disko"]
-	path = dependencies/disko
+[submodule "submodules/disko"]
+	path = submodules/disko
 	url = https://github.com/nix-community/disko.git
-[submodule "dependencies/lanzaboote"]
-	path = dependencies/lanzaboote
+[submodule "submodules/lanzaboote"]
+	path = submodules/lanzaboote
 	url = https://github.com/nix-community/lanzaboote.git
