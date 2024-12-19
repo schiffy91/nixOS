@@ -6,6 +6,6 @@ select hostfile in hosts/*.nix; do
   [ -z "$hostfile" ] && echo "Invalid choice." && continue
   sudo ln -sf "$SCRIPT_DIR/$hostfile" "host"
   echo "Set config to $hostfile"
-  sudo nixos-rebuild switch -I "nixos-config=$CONFIG_FILE" --show-trace
+  sudo nixos-rebuild switch --flake ".#$hostfile" --show-trace
   exit 0
 done
