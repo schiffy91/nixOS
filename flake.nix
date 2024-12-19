@@ -4,11 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     disko = {
-      url = "github:nix-community/disko";
+      url = "github:nix-community/disko/v1.10.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
-      url = "github:nix-community/lanzaboote";
+      url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -26,6 +26,7 @@
           specialArgs = { inherit disko lanzaboote; };
           modules = [
             ./configuration.nix
+            ./hosts/MBP-M1-VM.nix 
             disko.nixosModules.disko
             lanzaboote.nixosModules.default
           ];
@@ -35,6 +36,7 @@
             specialArgs = { inherit disko lanzaboote; };
             modules = [
                 ./configuration.nix
+                ./hosts/FRACTAL-NORTH.nix
                 disko.nixosModules.disko
                 lanzaboote.nixosModules.default
             ];
