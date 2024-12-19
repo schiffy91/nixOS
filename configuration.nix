@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  disko = import (builtins.fetchTarball { url = "https://github.com/nix-community/disko/archive/master.tar.gz"; }) { inherit lib; };
-  lanzaboote = import (builtins.fetchTarball { url = "https://github.com/nix-community/lanzaboote/archive/master.tar.gz"; }) { inherit lib pkgs; };
+  disko = import ./dependencies/disko { inherit lib; };
+  lanzaboote = import ./dependencies/lanzaboote { inherit lib pkgs; };
   hostConfig = import ./hosts/${builtins.baseNameOf ./host} { inherit config pkgs lib disko lanzaboote; };
 in
 {
