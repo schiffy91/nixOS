@@ -18,5 +18,5 @@ in
     ./modules/users.nix
   ];
   system.stateVersion = "24.11";
-  extra-experimental-features = flakes;
+  extra-experimental-features = "flakes";
 }
