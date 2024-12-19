@@ -1,15 +1,15 @@
 { config, pkgs, lib, ... }:
 
 let
-  disko = import ./dependencies/disko { inherit lib; };
+  disko = import ./dependencies/disko { inherit lib pkgs; };
   lanzaboote = import ./dependencies/lanzaboote { inherit lib pkgs; };
   hostConfig = import ./hosts/${builtins.baseNameOf ./host} { inherit config pkgs lib; };
 in
 {
   system.stateVersion = "24.11";
   imports = [
-    disko.nixosModules.disko
-    lanzaboote.nixosModules.lanzaboote
+    disko
+    lanzaboote
     ./modules/drives.nix
     ./modules/boot.nix
     ./modules/desktop.nix
