@@ -6,6 +6,7 @@ let
   hostConfig = import ./hosts/${builtins.baseNameOf ./host} { inherit config pkgs lib; };
 in
 {
+  system.stateVersion = "24.11";
   imports = [
     disko.nixosModules.disko
     lanzaboote.nixosModules.lanzaboote
@@ -19,5 +20,4 @@ in
     ./modules/users.nix
     hostConfig
   ];
-  system.stateVersion = "24.11";
 }
