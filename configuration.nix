@@ -5,7 +5,6 @@
     lanzaboote.nixosModules.default
     disko.nixosModules.default
     ./modules/drives.nix
-    ./hosts/${host}
     ./modules/boot.nix
     ./modules/desktop.nix
     ./modules/locale.nix
