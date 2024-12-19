@@ -1,10 +1,10 @@
-{ config, pkgs, lib, disko, lanzaboote, ... }:
+{ config, pkgs, lib, disko, lanzaboote, host, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./modules/drives.nix
-    ./hosts/${builtins.baseNameOf ./host}
+    ./hosts/${host}
     ./modules/boot.nix
     ./modules/desktop.nix
     ./modules/locale.nix
