@@ -10,6 +10,5 @@
   customDriveConfiguration = {
     swapSize = "17G";
     target = "nvme0n1";
-    
   };
 }
