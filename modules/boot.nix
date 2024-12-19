@@ -1,27 +1,31 @@
 { config, pkgs, lib, lanzaboote, ... }:
 
+let
+  cfg = config.custom;
+in
 {
   boot = {
-    initrd.luks.devices."cryptroot".device = "/dev/disk/by-partlabel/cryptroot";
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";
     };
     loader = {
-      # We need to disable systemd-boot
       systemd-boot.enable = false;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
         version = 2;
         efiSupport = true;
-        device = "nodev";
-        # This is important to make sure grub doesn't overwrite lanzaboote
+        device = "/dev/${cfg.driveConfiguration.target}";
         useOSProber = false;
-          mirroredBoots = [
+        mirroredBoots = [
           {
             devices = [ "/dev/disk/by-partlabel/ESP" ];
-            path = "/efi";
+            path = "/efi/a";
+          }
+          {
+            devices = [ "/dev/disk/by-partlabel/ESP" ];
+            path = "/efi/b";
           }
         ];
       };

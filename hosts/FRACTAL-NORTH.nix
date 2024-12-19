@@ -1,13 +1,14 @@
 { config, pkgs, lib, ... }:
 
+let
+  cfg = config.custom;
+in
 {
-  imports = [ ../modules/drives.nix ];
-
   # System information
   networking.hostName = "FRACTAL-NORTH";
 
   # Partitioning
-  customDriveConfiguration = {
+  cfg.driveConfiguration = {
     swapSize = "65G";
     target = "nvme0n1";
   };

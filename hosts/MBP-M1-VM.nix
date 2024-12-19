@@ -1,13 +1,14 @@
 { config, pkgs, lib, ... }:
 
+let
+  cfg = config.custom;
+in
 {
-  imports = [ ../modules/drives.nix ];
-
   # System information
   networking.hostName = "MBP-M1-VM";
 
   # Partitioning
-  customDriveConfiguration = {
+  cfg.driveConfiguration = {
     swapSize = "17G";
     target = "nvme0n1";
   };

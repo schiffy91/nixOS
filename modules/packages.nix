@@ -9,6 +9,7 @@
     pciutils
     usbutils
     google-chrome
-    sbctl niv
+    sbctl 
+    niv
   ];
 }
