@@ -32,23 +32,41 @@
                 };
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-f" ];
+                  formatOptions = {
+                    mkfsOptions = [ "-f" ];
+                  };
                   subvolumes = {
                     "/" = {
                       mountpoint = "/";
                       mountOptions = [ "compress=zstd" "subvol=root" "noatime" ];
+                      # Add the fileSystems options
+                      options = {
+                        "defaults" = true;
+                      };
                     };
                     "/home" = {
                       mountpoint = "/home";
                       mountOptions = [ "compress=zstd" "subvol=home" "noatime" ];
+                      # Add the fileSystems options
+                      options = {
+                        "defaults" = true;
+                      };
                     };
                     "/nix" = {
                       mountpoint = "/nix";
                       mountOptions = [ "compress=zstd" "noatime" "subvol=nix" "nodatacow" ];
+                      # Add the fileSystems options
+                      options = {
+                        "defaults" = true;
+                      };
                     };
                     "/.swapvol" = {
                       mountpoint = "/.swapvol";
                       mountOptions = [ "subvol=swap" "noatime" ];
+                      # Add the fileSystems options
+                      options = {
+                        "defaults" = true;
+                      };
                       swap = {
                         encrypted = {
                           enable = true;
@@ -62,6 +80,10 @@
                     "/var" = {
                       mountpoint = "/var";
                       mountOptions = [ "compress=zstd" "subvol=var" "noatime" ];
+                      # Add the fileSystems options
+                      options = {
+                        "defaults" = true;
+                      };
                     };
                   };
                 };
