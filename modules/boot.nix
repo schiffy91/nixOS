@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, disko, lanzaboote, ... }:
 
 let
   cfg = config.custom;

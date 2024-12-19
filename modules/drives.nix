@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, disko, ... }:
 with lib; 
 let
   cfg = config.custom.driveConfiguration;

@@ -1,7 +1,9 @@
-{ config, pkgs, lib, disko, lanzaboote, host, ... }:
+{ config, lib, nixpkgs, disko, lanzaboote, ... }:
 
 {
   imports = [
+    lanzaboote.nixosModules.default
+    disko.nixosModules.default
     ./modules/drives.nix
     ./hosts/${host}
     ./modules/boot.nix
@@ -12,5 +14,6 @@
     ./modules/sound.nix
     ./modules/users.nix
   ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "24.11";
 }
