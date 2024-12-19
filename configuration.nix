@@ -18,8 +18,8 @@ in
 {
   system.stateVersion = "24.11";
   imports = [
-    disko.nixosModules.disko
-    lanzaboote.nixosModules.lanzaboote
+    disko
+    lanzaboote
     ./modules/drives.nix
     ./modules/boot.nix
     ./modules/desktop.nix
