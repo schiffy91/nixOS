@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  options.partitioning = with lib; {
+    target = mkOption { type = types.nullOr types.str; default = null; };
+    swapSize = mkOption { type = types.nullOr types.str; default = null; };
+  };
   config = lib.mkIf (config.partitioning.target != null && config.partitioning.swapSize != null) {
     disko.devices = {
       disk = {
