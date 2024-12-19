@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
-
+with (import <nixpkgs> {});
 let
   disko = import ./submodules/disko/. { inherit lib; };
   lanzaboote = builtins.getFlake "./submodules/lanzaboote/flake.nix";
