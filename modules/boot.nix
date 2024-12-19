@@ -5,7 +5,6 @@ let
 in
 {
   boot = {
-    disko.enableConfig = true;
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";
