@@ -4,7 +4,6 @@
   imports = [ ../modules/drives.nix ];
 
   # System information
-  system = "aarch64-linux";
   networking.hostName = "MBP-M1-VM";
 
   # Partitioning

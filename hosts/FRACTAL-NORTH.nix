@@ -4,7 +4,6 @@
   imports = [ ../modules/drives.nix ];
 
   # System information
-  system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
 
   # Partitioning
