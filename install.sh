@@ -1,11 +1,9 @@
 #!/bin/sh
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-CONFIG_FILE="$SCRIPT_DIR/configuration.nix"
 PS3="Select host: "
-select hostfile in hosts/*.nix; do
-  [ -z "$hostfile" ] && echo "Invalid choice." && continue
-  sudo ln -sf "$SCRIPT_DIR/$hostfile" "host"
-  echo "Set config to $hostfile"
-  sudo nixos-rebuild switch --flake ".#$hostfile" --show-trace
-  exit 0
+select host in MBP-M1-VM FRACTAL-NORTH; do
+    [ -z "$host" ] && echo "Invalid choice." && continue
+    echo "Building configuration for $host"
+    sudo nixos-rebuild switch --flake ".#$host" --show-trace
+    exit 0
 done

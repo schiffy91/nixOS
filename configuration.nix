@@ -1,14 +1,8 @@
-{ config, pkgs, lib, ... }:
-with (import <nixpkgs> {});
-let
-  disko = import ./submodules/disko/. { inherit lib; };
-  lanzaboote = builtins.getFlake "./submodules/lanzaboote";
-in
+{ config, pkgs, lib, disko, lanzaboote, ... }:
+
 {
   imports = [
-    #./hardware-configuration.nix
-    disko.nixosModules.disko
-    lanzaboote.nixosModules.default
+    ./hardware-configuration.nix
     ./modules/drives.nix
     ./hosts/${builtins.baseNameOf ./host}
     ./modules/boot.nix
