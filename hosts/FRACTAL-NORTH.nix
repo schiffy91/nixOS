@@ -1,16 +1,16 @@
-{ config, pkgs, lib, disko, lanzaboote, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  imports = [ ../modules/partitioning.nix ]; # Import partitioning.nix
+  imports = [ ../modules/drives.nix ];
 
   # System information
   system = "x86_64-linux";
   networking.hostName = "FRACTAL-NORTH";
 
   # Partitioning
-  partitioning = {
+  customDriveConfiguration = {
     swapSize = "65G";
-    target = "/dev/nvme0n1";
+    target = "nvme0n1";
   };
 
   # Nvidia drivers

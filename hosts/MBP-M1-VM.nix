@@ -1,15 +1,16 @@
-{ config, pkgs, lib, disko, lanzaboote, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  imports = [ ../modules/partitioning.nix ]; # Import partitioning.nix
-  
+  imports = [ ../modules/drives.nix ];
+
   # System information
-  system.system = "aarch64-linux";
+  system = "aarch64-linux";
   networking.hostName = "MBP-M1-VM";
 
   # Partitioning
-  partitioning = {
+  customDriveConfiguration = {
     swapSize = "17G";
-    target = "/dev/nvme0n1";
+    target = "nvme0n1";
+    
   };
 }

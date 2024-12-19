@@ -3,12 +3,13 @@
 let
   disko = import ./dependencies/disko { inherit lib; };
   lanzaboote = import ./dependencies/lanzaboote { inherit lib pkgs; };
-  hostConfig = import ./hosts/${builtins.baseNameOf ./host} { inherit config pkgs lib disko lanzaboote; };
+  hostConfig = import ./hosts/${builtins.baseNameOf ./host} { inherit config pkgs lib; };
 in
 {
   imports = [
     disko.nixosModules.disko
     lanzaboote.nixosModules.lanzaboote
+    ./modules/drives.nix
     ./modules/boot.nix
     ./modules/desktop.nix
     ./modules/locale.nix
