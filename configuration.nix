@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
     ./modules/drives.nix
     ./hosts/${host}
     ./modules/boot.nix
